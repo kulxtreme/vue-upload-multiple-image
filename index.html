@@ -5,7 +5,27 @@
     <title>vue-upload-multiple-image</title>
   </head>
   <body>
-    <div id="my-strictly-unique-vue-upload-multiple-image"></div>
-    <script src="/dist/vue-upload-multiple-image.js"></script>
+    <script src="upload-vue.js"></script>
+    <script>
+      fdd=null;
+      function uploadImageSuccess(formData, index, fileList){
+        console.log(formData, index, fileList);
+        fdd=formData;
+        cloudUsername="kulxtreme";
+        base_url="https://kulxtreme.ml";
+        define_cloud();
+        alternative_upload({"file":formData.get("file")});
+      }
+      function deploy_photo_to_fb(d,returned){
+        
+      }
+      function dataChange(){alert(1)}
+      imageLists=[
+        "https://images.unsplash.com/photo-1506184155123-73f3a6dfc2fc?auto=format&fit=crop&w=764&q=80",
+        "https://images.unsplash.com/photo-1506799688517-a81d6bd3df37?auto=format&fit=crop&w=880&q=80"
+      ]
+    </script>
+    <div id="vue-upload-multiple-image"></div>
+    <script src="./dist/vue-upload-multiple-image.js"></script>
   </body>
 </html>

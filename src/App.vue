@@ -1,14 +1,16 @@
 <template>
-  <div id="my-strictly-unique-vue-upload-multiple-image" style="display: flex; justify-content: center;">
+  <div id="vue-upload-multiple-image">
     <vue-upload-multiple-image
       @upload-success="uploadImageSuccess"
       @before-remove="beforeRemove"
       @edit-image="editImage"
       @data-change="dataChange"
       @limit-exceeded="limitExceeded"
+      :imageList="imageList"
       ></vue-upload-multiple-image>
   </div>
 </template>
+
 
 <script>
 import VueUploadMultipleImage from './components/VueUploadMultipleImage'
@@ -17,13 +19,15 @@ export default {
   name: 'app',
   data () {
     return {
+      cosi:"kkotok"
     }
   },
+  props:["uploadImageSuccess","dataChange","imageList"],
   components: {
     VueUploadMultipleImage
   },
   methods: {
-    uploadImageSuccess(formData, index, fileList) {
+    uploadImageSuccess2(formData, index, fileList) {
       console.log('data', formData, index, fileList)
       // Upload image api
       // axios.post('http://gostore.gostore-api.test/api/items/upload', formData).then(response => {
@@ -41,7 +45,7 @@ export default {
     editImage (formData, index, fileList) {
       console.log('edit data', formData, index, fileList)
     },
-    dataChange (data) {
+    dataChange2 (data) {
       console.log(data)
     },
     limitExceeded(amount){
@@ -50,3 +54,6 @@ export default {
   }
 }
 </script>
+<style>
+.image-bottom{display: none !important;}
+</style>
