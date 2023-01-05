@@ -140,7 +140,7 @@
                 </svg>
                 {{primaryText}}
               </span>
-              <popper
+              <!--<popper
                 trigger="click"
                 :options="{placement: 'top'}"
               >
@@ -160,7 +160,7 @@
                     <path d="M304.2 352H296c-4.4 0-8-3.6-8-8v-94.8c0-15.3-11.5-28.1-26.7-29.8-2.5-.3-4.8-.5-6.7-.5-23.7 0-44.6 11.9-57 30.1l-.1.1v-.1c-1 2-1.7 5.3.7 6.5.6.3 1.2.5 1.8.5h16c4.4 0 8 3.6 8 8v80c0 4.4-3.6 8-8 8h-8.2c-8.7 0-15.8 7.1-15.8 15.8v.3c0 8.7 7.1 15.8 15.8 15.8h96.4c8.7 0 15.8-7.1 15.8-15.8v-.3c0-8.7-7.1-15.8-15.8-15.8zM256 128c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32z"></path>
                   </svg>
                 </i>
-              </popper>
+              </popper>-->
             </div>
             <a
               class="text-small mark-text-primary cursor-pointer"
@@ -281,8 +281,8 @@
 
 <script>
 import { forEach, findIndex, orderBy, cloneDeep } from 'lodash'
-import Popper from 'vue-popperjs'
-import 'vue-popperjs/dist/css/vue-popper.css'
+//import Popper from 'vue-popperjs'
+//import 'vue-popperjs/dist/css/vue-popper.css'
 import VueImageLightboxCarousel from 'vue-image-lightbox-carousel'
 export default {
 
@@ -309,10 +309,10 @@ export default {
       type: String,
       default: 'Set as default'
     },
-    popupText: {
+    /*popupText: {
       type: String,
       default: 'This image will be displayed as default'
-    },
+    },*/
     dropText: {
       type: String,
       default: 'Drop your file here ...'
@@ -374,7 +374,7 @@ export default {
     }
   },
   components: {
-    Popper,
+    //Popper,
     VueImageLightboxCarousel
   },
   computed: {
@@ -393,6 +393,20 @@ export default {
     }
   },
   methods: {
+    initialize(){
+      this.images = []
+      this.dataImages = []
+      this.images = cloneDeep(this.dataImages)
+      let im; 
+      for(let i=0;i<imageList.length;i++){
+        im = { 
+            name: this.imageList[i].split("/")[1].split("?")[0], 
+            path: this.imageList[i], highlight: i==0?1:0, default: i==0?1:0 };
+        if (!this.images.length) 
+          this.currentIndexImage = 0
+        this.images.push(im)
+      }
+    },
     preventEvent (e) {
       e.preventDefault()
       e.stopPropagation()
@@ -549,11 +563,16 @@ export default {
     }
   },
   watch: {
-    dataImages: {
+    /*dataImages: {
       handler: function (newVal) {
         this.images = cloneDeep(newVal)
       },
       deep: true
+    }*/
+    imageList: {
+      handler: function(newVal){
+        this.initialize();
+      }
     }
   },
   mounted () {
@@ -564,17 +583,7 @@ export default {
     })
   },
   created () {
-    this.images = []
-    this.images = cloneDeep(this.dataImages)
-    let im; 
-    for(let i=0;i<imageList.length;i++){
-      im = { 
-          name: this.imageList[i].split("/")[1].split("?")[0], 
-          path: this.imageList[i], highlight: i==0?1:0, default: i==0?1:0 };
-      if (!this.images.length) 
-        this.currentIndexImage = 0
-      this.images.push(im)
-    }
+    this.initialize()
   }
 }
 </script>
@@ -744,7 +753,6 @@ export default {
   max-height: 100px;
   max-width: 140px;
   display: block;
-  vertical-align: middle;
 }
 /*image bottom*/
 .image-bottom {

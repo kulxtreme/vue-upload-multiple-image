@@ -14,14 +14,8 @@
 
 <script>
 import VueUploadMultipleImage from './components/VueUploadMultipleImage'
-import axios from 'axios'
 export default {
   name: 'app',
-  data () {
-    return {
-      cosi:"kkotok"
-    }
-  },
   props:["uploadImageSuccess","dataChange","imageList"],
   components: {
     VueUploadMultipleImage
