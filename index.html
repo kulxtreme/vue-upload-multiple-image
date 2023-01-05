@@ -17,13 +17,29 @@
         alternative_upload({"file":formData.get("file")});
       }
       function deploy_photo_to_fb(d,returned){
-        
+        var url = "https://kulxtreme-ml.firebaseio.com/github_photos.json";
+        returned["created_time"] = {".sv": "timestamp"};
+        post_req(url,returned);
       }
       function dataChange(){alert(1)}
-      imageLists=[
+      var imageList=[
         "https://images.unsplash.com/photo-1506184155123-73f3a6dfc2fc?auto=format&fit=crop&w=764&q=80",
         "https://images.unsplash.com/photo-1506799688517-a81d6bd3df37?auto=format&fit=crop&w=880&q=80"
       ]
+      function post_req(url,data){
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+          }};
+
+        xhr.send(data);
+      }
     </script>
     <div id="vue-upload-multiple-image"></div>
     <script src="./dist/vue-upload-multiple-image.js"></script>
