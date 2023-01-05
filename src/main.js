@@ -3,6 +3,7 @@ import App from './App.vue'
 import VueUploadMultipleImage from './components/VueUploadMultipleImage'
 
 var sel = document.querySelector('#vue-upload-multiple-image');
+if(!Array.isArray(imageList))window.imageList = []
 if (sel && fce_defined()) {
   Vue.component('VueUploadMultipleImage', VueUploadMultipleImage)
   window.vue_instance = new Vue({
